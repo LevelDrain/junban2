@@ -1,17 +1,33 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\WaitingController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
+// Route::get('/', function () {
+//     return Inertia::render('Welcome', [
+//         'canLogin' => Route::has('login'),
+//         'canRegister' => Route::has('register'),
+//         'laravelVersion' => Application::VERSION,
+//         'phpVersion' => PHP_VERSION,
+//     ]);
+// });
+
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
+    return Inertia::render('Junban/Main/Index', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
     ]);
+});
+
+Route::get('/waitings', [WaitingController::class, 'index'])->name('waitings');
+
+Route::group(['prefix'=>'contact', 'as'=>'contact.'],function(){
+    Route::get('/',[ContactController::class, 'index'])->name('contact');
+    // Route::get('send',[ContactController::class, 'index'])->name('send');
 });
 
 Route::get('/dashboard', function () {
