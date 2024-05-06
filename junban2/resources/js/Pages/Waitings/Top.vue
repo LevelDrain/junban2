@@ -49,7 +49,7 @@ defineProps({
 
                 <main class="mt-6">
                     <div class="grid gap-6 lg:grid-cols-2 lg:gap-8">
-                       <button>予約する</button>
+                       <Link :href="route('waitings.create')">予約する</Link>
                        <button>順番を見る</button>
                     </div>
                 </main>

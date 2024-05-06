@@ -17,18 +17,13 @@ use Inertia\Inertia;
 // });
 
 Route::get('/', function () {
-    return Inertia::render('Junban/Main/Index', [
+    return Inertia::render('Waitings/Top', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
     ]);
 });
 
-Route::get('/waitings', [WaitingController::class, 'index'])->name('waitings');
-
-Route::group(['prefix'=>'contact', 'as'=>'contact.'],function(){
-    Route::get('/',[ContactController::class, 'index'])->name('contact');
-    // Route::get('send',[ContactController::class, 'index'])->name('send');
-});
+Route::resource('waitings', WaitingController::class);
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
