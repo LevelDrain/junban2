@@ -14,9 +14,7 @@ defineProps({
 <template>
     <Head title="JunNavi" />
     <div class="bg-gray-50 text-black/50 dark:bg-black dark:text-white/50">
-        <div
-            class="relative min-h-screen flex flex-col items-center justify-center selection:bg-[#FF2D20] selection:text-white"
-        >
+        <div class="relative min-h-screen flex flex-col items-center justify-center selection:bg-[#FF2D20] selection:text-white">
             <div class="relative w-full max-w-2xl px-6 lg:max-w-7xl">
                 <header class="text-gray-600 body-font">
                     <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
