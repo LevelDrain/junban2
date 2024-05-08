@@ -18,39 +18,47 @@ defineProps({
             class="relative min-h-screen flex flex-col items-center justify-center selection:bg-[#FF2D20] selection:text-white"
         >
             <div class="relative w-full max-w-2xl px-6 lg:max-w-7xl">
-                <header class="grid grid-cols-2 items-center gap-2 py-10 lg:grid-cols-3">
-                    <nav v-if="canLogin" class="-mx-3 flex flex-1 justify-end">
-                        <Link
-                            v-if="$page.props.auth.user"
-                            :href="route('dashboard')"
-                            class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
-                        >
-                            Dashboard
-                        </Link>
+                <header class="text-gray-600 body-font">
+                    <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+                        <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full" viewBox="0 0 24 24">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+                        </svg>
+                        <span class="ml-3 text-xl">くまくま病院</span>
+                        </a>
 
-                        <template v-else>
+                        <nav v-if="canLogin" class="md:ml-auto flex flex-wrap items-center text-base justify-center">
                             <Link
-                                :href="route('login')"
-                                class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                                v-if="$page.props.auth.user"
+                                :href="route('dashboard')"
+                                class="mr-5 hover:text-gray-900"
                             >
-                                Log in
+                                Dashboard
                             </Link>
 
-                            <Link
-                                v-if="canRegister"
-                                :href="route('register')"
-                                class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
-                            >
-                                Register
-                            </Link>
-                        </template>
-                    </nav>
+                            <template v-else>
+                                <Link
+                                    v-if="canLogin"
+                                    :href="route('login')"
+                                    class="mr-5 hover:text-gray-900"
+                                >
+                                    管理者ログイン
+                                </Link>
+                            </template>
+                        </nav>
+                    </div>
                 </header>
 
                 <main class="mt-6">
-                    <div class="grid gap-6 lg:grid-cols-2 lg:gap-8">
-                       <Link :href="route('waitings.create')">予約する</Link>
-                       <button>順番を見る</button>
+                    <div class="container mx-auto flex px-5 py-12 items-center justify-center flex-col">
+                        <img class="lg:w-2/6 md:w-3/6 w-5/6 mb-10 object-cover object-center rounded" alt="hero" src="https://dummyimage.com/720x600">
+                        <div class="text-center lg:w-2/3 w-full">
+                        <p class="mb-8 leading-relaxed">株式会社アイソルのアプリケーション「<a href="https://www.ai-sol.jp/product/junnavi/" target="_blank">JunNavi</a>」を元に自主制作した当日順番・日時予約システムです。</p>
+                        <div class="flex justify-center">
+                            <Link :href="route('waitings.create')" class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">予約する</Link>
+                            <button class="ml-4 inline-flex text-gray-700 bg-indigo-100 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-200 rounded text-lg">順番を見る</button>
+                        </div>
+                        </div>
                     </div>
                 </main>
 
