@@ -15,7 +15,7 @@ class WaitingController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Waitings/Create');
+        // return Inertia::render('Waitings/Create');
     }
 
     /**
@@ -31,34 +31,24 @@ class WaitingController extends Controller
      */
     public function store(StoreWaitingRequest $request)
     {
-        $patient=Patient::select('patient_id','name')
-        ->where('patient_id', $request->patient_id)
-        ->get();
-
-        Waiting::create([
-            'patient_id'=> $patient->patient_id,
-            'name'=> $patient->name,
-            'status'=> 1,
+        $request->validate([
+            'patient_id'=>['required','exists:patients,patient_id']
+        ],[
+            'exists'=>'診察券番号が登録されていないか、正しく入力されていません。'
         ]);
 
-        return to_route('waitings.show');
+        Waiting::create([
+            'patient_id'=> $request->patient_id,
+            'order_id'=> rand(100, 999),
+            'order_num'=> 1,
+        ]);
 
-        // if ($patient->isEmpty()) {
-        //     return Inertia::render('Waitings/Create',[
-        //         'patient_id'=>$request->patient_id,
-        //         'message'=>'診察券番号が登録されていないか、正しく入力されていません。',
-        //     ]);
-        // } else {
-        //     Waiting::create([
-        //         'patient_id'=> $patient->patient_id,
-        //         'name'=> $patient->name,
-        //         'status'=> 1,
-        //     ]);
-    
-        //     return Inertia::render('Waitings/Show',[
-        //         'name'=>$patient->name,
-        //     ]);
-        // }
+       $full_name=Patient::where('patient_id',$request->patient_id)->get('name');
+    //    dd($full_name);
+
+        return Inertia::render('Waitings/Show',[
+            'info'=>$full_name
+        ]);
     }
 
     /**

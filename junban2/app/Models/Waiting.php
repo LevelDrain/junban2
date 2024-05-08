@@ -9,13 +9,9 @@ class Waiting extends Model
 {
     use HasFactory;
 
-    protected $attributes = [
-        'order' => 1,
-    ];
-
-    protected $fillable=[
+    protected $fillable = [
         'patient_id',
         'order_id',
-        'order',
+        'order_num',
     ];
 }
