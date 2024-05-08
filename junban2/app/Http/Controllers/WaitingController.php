@@ -33,21 +33,21 @@ class WaitingController extends Controller
     {
         $request->validate([
             'patient_id'=>['required','exists:patients,patient_id']
+            // ,'unique:waitings,patient_id'
         ],[
-            'exists'=>'診察券番号が登録されていないか、正しく入力されていません。'
+            'exists'=>'診察券番号が登録されていないか、正しく入力されていません。',
+            // 'unique'=>'受付番号'.Waiting::where('patient_id',$request->patient_id)->first()->order_id.'で登録されています。'
         ]);
 
-        Waiting::create([
+        $created= Waiting::create([
             'patient_id'=> $request->patient_id,
             'order_id'=> rand(100, 999),
             'order_num'=> 1,
         ]);
-
-       $full_name=Patient::where('patient_id',$request->patient_id)->get('name');
-    //    dd($full_name);
+    //    $order_id=Waiting::where('patient_id',$request->patient_id)->first()->order_id;
 
         return Inertia::render('Waitings/Show',[
-            'info'=>$full_name
+            'info'=>$created->order_id
         ]);
     }
 
