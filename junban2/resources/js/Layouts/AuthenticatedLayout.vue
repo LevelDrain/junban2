@@ -30,7 +30,13 @@ const showingNavigationDropdown = ref(false);
                             <!-- Navigation Links -->
                             <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                                 <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
-                                    Dashboard
+                                    ダッシュボード
+                                </NavLink>
+                                <NavLink :href="route('patients.index')" :active="route().current('dashboard')">
+                                    患者さん情報管理
+                                </NavLink>
+                                <NavLink :href="route('patients.create')" :active="route().current('dashboard')">
+                                    個人情報の登録
                                 </NavLink>
                             </div>
                         </div>
