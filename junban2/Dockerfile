@@ -8,7 +8,7 @@ COPY package*.json vite.config.js ./
 COPY resources ./resources
 COPY public ./public
 
-RUN npm install && npm install ziggy-js
+RUN npm install
 RUN npm run build
 
 
