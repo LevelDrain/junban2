@@ -1,0 +1,13 @@
+name: Ping Render App monthly
+
+on:
+  schedule:
+    - cron: "0 0 1 * *"  # 毎月1日 0時（UTC）
+  workflow_dispatch:
+
+jobs:
+  curl:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Reservation App
+        run: curl -s https://junban2.onrender.com
