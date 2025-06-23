@@ -15,7 +15,7 @@ jobs:
 
       - name: Trigger Render Deploy
         run: |
-          curl -X POST "https://api.junban2.onrender.com/deploy/srv-d1a0p92li9vc73al6uh0?key= ${{ secrets.RENDER_API_KEY }}"
+          curl -X POST "https://api.render.com/deploy/srv-d1a0p92li9vc73al6uh0?key= ${{ secrets.RENDER_API_KEY }}"
 
       - name: Wait for Render app to be ready
         run: |
@@ -24,7 +24,7 @@ jobs:
 
       - name: Run Laravel migrate command on Render
         run: |
-          curl -X POST "https://api.junban2.onrender.com/v1/services/srv-d1a0p92li9vc73al6uh0/commands" \
+          curl -X POST "https://api.render.com/v1/services/srv-d1a0p92li9vc73al6uh0/commands" \
           -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}" \
           -H "Content-Type: application/json" \
           -d '{"command": "php artisan migrate --force", "shell": true}'
