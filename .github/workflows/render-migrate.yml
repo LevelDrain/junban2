@@ -15,7 +15,7 @@ jobs:
 
       - name: Trigger Render Deploy
         run: |
-          curl -X POST "https://api.render.com/deploy/srv-d1a0p92li9vc73al6uh0?key= ${{ secrets.RENDER_API_KEY }}"
+          curl -X POST "https://api.render.com/deploy/srv-d1a0p92li9vc73al6uh0?key=${{ secrets.RENDER_API_KEY }}"
 
       - name: Wait for Render app to be ready
         run: |
