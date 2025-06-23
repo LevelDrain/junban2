@@ -1,0 +1,30 @@
+name: Deploy and Migrate to Render
+
+on:
+  push:
+    branches:
+      - master  # デプロイ＆マイグレーションを自動化したいブランチを指定
+
+jobs:
+  deploy_and_migrate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Trigger Render Deploy
+        run: |
+          curl -X POST "https://junban2.onrender.com/deploy/<SERVICE_ID>?key=<API_KEY>"
+
+      - name: Wait for Render app to be ready
+        run: |
+          echo "Waiting for app to be ready..."
+          sleep 40  # 40秒待機。必要に応じて調整可
+
+      - name: Run Laravel migrate command on Render
+        run: |
+          curl -X POST "https://junban2.onrender.com/v1/services/<SERVICE_ID>/commands" \
+          -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}" \
+          -H "Content-Type: application/json" \
+          -d '{"command": "php artisan migrate --force", "shell": true}'
