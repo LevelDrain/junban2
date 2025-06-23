@@ -27,4 +27,4 @@ jobs:
           curl -X POST "https://api.render.com/v1/services/srv-d1a0p92li9vc73al6uh0/commands" \
           -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}" \
           -H "Content-Type: application/json" \
-          -d '{"command": "php artisan migrate --force", "shell": true}'
+          -d '{"command": "php artisan session:table && php artisan migrate --force", "shell": true}'
