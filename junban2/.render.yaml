@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: junban2
+    env: php
+    plan: free
+    buildCommand: |
+      composer install --no-dev --optimize-autoloader
+    startCommand: >
+      sh -c "php artisan config:clear &&
+             php artisan route:clear &&
+             php artisan view:clear &&
+             php artisan cache:clear"
