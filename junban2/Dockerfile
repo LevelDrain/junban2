@@ -30,6 +30,9 @@ WORKDIR /var/www
 # Laravel本体をコピー
 COPY . .
 
+# 念のため public/build を掃除
+RUN rm -rf public/build
+
 # フロントエンドのビルド成果物を上書き
 COPY --from=frontend /app/public/build /var/www/public/build
 
