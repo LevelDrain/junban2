@@ -4,7 +4,7 @@ FROM node:18 AS frontend
 WORKDIR /app
 
 # package.jsonとvite.config.jsなどをコピー
-COPY package*.json vite.config.js ./
+COPY package*.json vite.config.js tailwind.config.js postcss.config.js ./
 COPY resources ./resources
 COPY public ./public
 
@@ -29,9 +29,6 @@ WORKDIR /var/www
 
 # Laravel本体をコピー
 COPY . .
-
-# 念のため public/build を掃除
-RUN rm -rf public/build
 
 # フロントエンドのビルド成果物を上書き
 COPY --from=frontend /app/public/build /var/www/public/build
