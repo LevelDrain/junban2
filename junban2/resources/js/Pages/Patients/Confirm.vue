@@ -18,8 +18,14 @@ const form = reactive({
     name: props.name,
 })
 
-const submit = () => {
-    router.post(route('patients.store'), form)
+const submit = async () => {
+    try {
+        await axios.get('/sanctum/csrf-cookie');
+        router.post(route('patients.store'), form);
+    } catch (error) {
+        console.error('Error fetching CSRF cookie:', error);
+        return;
+    }
 }
 </script>
 

@@ -16,13 +16,20 @@ const form = useForm({
     email: '',
 });
 
-const submit = () => {
-    form.post(route('password.email'));
+const submit = async () => {
+    try {
+        await axios.get('/sanctum/csrf-cookie');
+        form.post(route('password.email'));
+    } catch (error) {
+        console.error('Error fetching CSRF cookie:', error);
+        return;
+    }
 };
 </script>
 
 <template>
     <GuestLayout>
+
         <Head title="Forgot Password" />
 
         <div class="mb-4 text-sm text-gray-600">
@@ -38,15 +45,8 @@ const submit = () => {
             <div>
                 <InputLabel for="email" value="Email" />
 
-                <TextInput
-                    id="email"
-                    type="email"
-                    class="mt-1 block w-full"
-                    v-model="form.email"
-                    required
-                    autofocus
-                    autocomplete="username"
-                />
+                <TextInput id="email" type="email" class="mt-1 block w-full" v-model="form.email" required autofocus
+                    autocomplete="username" />
 
                 <InputError class="mt-2" :message="form.errors.email" />
             </div>
